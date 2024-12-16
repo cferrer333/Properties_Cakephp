@@ -21,6 +21,7 @@
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
 
+
 use Cake\Routing\Route\DashedRoute;
 use Cake\Routing\RouteBuilder;
 
@@ -48,6 +49,8 @@ return function (RouteBuilder $routes): void {
      * `{action}` markers.
      */
     $routes->setRouteClass(DashedRoute::class);
+
+    $routes->connect('/HouseJet_sample/sample/properties/search', ['controller' => 'Search', 'action' => 'index']);
 
     $routes->scope('/', function (RouteBuilder $builder): void {
         /*

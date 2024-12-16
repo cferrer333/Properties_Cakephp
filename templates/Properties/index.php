@@ -1,8 +1,5 @@
-<!--get request for the search form-->
-<?= $this->Form->create(null, ['type' => 'get']) ?>
-    <?= $this->Form->control('key', ['label' => 'Search', 'value' => $this->request->getQuery('key'), 'autocomplete' => 'off']) ?>
-    <?= $this->Form->submit() ?>
-    <?= $this->Form->end() ?>
+<!-- Link to the search form-->
+<a href="/HouseJet_sample/sample/properties/search">Search Properties</a>
 <!-- Loop through the properties data and display them -->
 
 <h1>List of Properties</h1>

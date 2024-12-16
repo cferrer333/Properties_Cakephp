@@ -30,6 +30,49 @@ class PropertiesController extends AppController
         $this->set(compact('properties'));
     }
 
+    public function search()
+    {
+        $query = $this->Properties->find();
+
+    // Get search parameters from the request
+    $bdr = $this->request->getQuery('bdr');
+    $baths = $this->request->getQuery('baths');
+    $address = $this->request->getQuery('address');
+    $minPrice = $this->request->getQuery('minPrice');
+    $maxPrice = $this->request->getQuery('maxPrice');
+
+    // Apply search conditions
+    if (!empty($bdr)) {
+        $query->where(['Bdr' => $bdr]);
+    }
+
+    if (!empty($baths)) {
+        $query->where(['Baths' => $baths]);
+    }
+
+    if (!empty($address)) {
+        $query->where(['Address LIKE' => '%' . $address . '%']);
+    }
+
+    if (!empty($minPrice)) {
+        $query->where(['Price >=' => $minPrice]); 
+    }
+
+    if (!empty($maxPrice)) {
+        $query->where(['Price <=' => $maxPrice]);
+    }
+
+    // Select specific fields (including Photo)
+    $query->select(['Bdr', 'Baths', 'SqFt', 'Photo', 'Price', 'Address']); 
+
+    // Fetch data from Table
+    $properties = $query->all(); 
+
+    // Pass data to the view
+    $this->set(compact('properties'));
+}
+
+
     /**
      * View method
      *
